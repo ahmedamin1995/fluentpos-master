@@ -1,0 +1,240 @@
+{
+	"info": {
+		"_postman_id": "60ead734-8d34-4037-8062-db596d83c29a",
+		"name": "fluentpos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "catalogs",
+			"item": [
+				{
+					"name": "Get Brands",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/catalog/brands",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"catalog",
+								"brands"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Brand By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/catalog/brands/538f5ce7-9bd4-4309-8e62-6e566b01fdfe",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"catalog",
+								"brands",
+								"538f5ce7-9bd4-4309-8e62-6e566b01fdfe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Brand",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"string\",\r\n  \"imageUrl\": \"string\",\r\n  \"detail\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/catalog/brands",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"catalog",
+								"brands"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "identity",
+			"item": [
+				{
+					"name": "Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"token\", jsonData.data.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"{{default_user}}\",\r\n  \"password\": \"{{default_user_password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/identity/tokens",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"identity",
+								"tokens"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "people",
+			"item": [
+				{
+					"name": "register-customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"mukesh\",\r\n  \"phone\": \"7306488721\",\r\n  \"email\": \"mukesh@gmail.com\",\r\n  \"type\":\"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/people/customers",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"people",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-carts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "get-cart-items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://localhost:5001/api"
+		},
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "default_user",
+			"value": "staff@fluentpos.com"
+		},
+		{
+			"key": "default_user_password",
+			"value": "123Pa$$word!"
+		}
+	]
+}
